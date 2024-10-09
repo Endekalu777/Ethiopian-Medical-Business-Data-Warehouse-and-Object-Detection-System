@@ -15,10 +15,10 @@ async def scrape_channel(client, channel_username, media_dir):
     channel_title = entity.title  # Extract the channel's title
     
     # Create a CSV file for each channel
-    filename = f"{channel_username}_data.csv"
+    filename = f"../scrapped_data/{channel_username}_data.csv"
     with open(filename, 'w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
-        writer.writerow(['Channel Title', 'Channel Username', 'ID', 'Message', 'Date', 'Media Path'])
+        writer.writerow(['Channel Title', 'Channel Username', 'ID', 'Message', 'Date', 'Media Path', 'views', 'message_link'])
         
         async for message in client.iter_messages(entity, limit=10000):
             media_path = None
@@ -30,7 +30,8 @@ async def scrape_channel(client, channel_username, media_dir):
                 await client.download_media(message.media, media_path)
             
             # Write the channel title along with other data
-            writer.writerow([channel_title, channel_username, message.id, message.message, message.date, media_path])
+            message_link = f'https://t.me/{channel_username}/{message.id}' if channel_username else None
+            writer.writerow([channel_title, channel_username, message.id, message.message, message.date, media_path, message.views, message_link])
 
 # Initialize the client
 client = TelegramClient('scraping_session', api_id, api_hash)
