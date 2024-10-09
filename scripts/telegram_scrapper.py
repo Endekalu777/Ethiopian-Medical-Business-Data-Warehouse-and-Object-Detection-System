@@ -6,8 +6,8 @@ import logging
 
 # Set up logging configuration
 logging.basicConfig(
-    filename = '../scrapped_data/scraper.log'
-    level = logging.INFO
+    filename = '../scrapped_data/scraper.log',
+    level = logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
 )
 
