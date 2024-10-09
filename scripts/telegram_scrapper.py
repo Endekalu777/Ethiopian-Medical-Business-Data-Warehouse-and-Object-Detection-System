@@ -58,10 +58,13 @@ async def main():
         await client.start()
         logging.info("Telegram client started")
         
-        # Create a directory for media files
+        # Create a directory for media files and scrapped data folder
+        scrapped_data_dir = '../scrapped_data'
         media_dir = 'photos'
+
         os.makedirs(media_dir, exist_ok=True)
-        logging.info("Created media directory")
+        os.makedirs(scrapped_data_dir, exist_ok=True)
+        logging.info("Created required directories if they didn't exist")
 
         # List of channels to scrape
         channels = [
