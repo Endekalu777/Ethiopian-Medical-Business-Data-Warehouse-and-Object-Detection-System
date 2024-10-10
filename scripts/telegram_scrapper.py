@@ -91,7 +91,9 @@ async def main():
         message_channels = [
             '@DoctorsET',
             '@yetenaweg',
-            '@EAHCI'
+            '@EAHCI',
+            '@CheMed123',
+            '@lobelia4cosmetics'
         ]
 
         # Scrape photos from the specified channels
