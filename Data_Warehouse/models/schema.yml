@@ -4,23 +4,32 @@ models:
   - name: cleaned_telegram_data
     description: "Cleaned data from Telegram channels relevant to Ethiopian medical businesses."
     columns:
-      - name: Channel Title
+      - name: channel_title
         tests:
           - not_null
           - unique
-      - name: Channel Username
+      - name: channel_username
         tests:
           - not_null
-      - name: ID
+      - name: message_id
         tests:
           - not_null
           - unique
-      - name: Message
+      - name: message
         tests:
           - not_null
-      - name: Date
+      - name: date
         tests:
           - not_null
       - name: views
         tests:
           - not_null
+
+sources:
+  - name: public
+    tables:
+      - name: doctorset
+      - name: lobelia4cosmetics
+      - name: yetenaweg
+      - name: eahci
+      - name: chemed
