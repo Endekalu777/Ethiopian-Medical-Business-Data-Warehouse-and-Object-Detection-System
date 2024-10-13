@@ -59,3 +59,20 @@ def insert_detection_data(db, row, source):
     db.add(detection)
     db.commit()
     db.refresh(detection)
+
+# Main function to process CSVs and insert data into the database
+def process_csv(file_path, source):
+    db = SessionLocal()
+    
+    # Load the CSV file
+    df = pd.read_csv(file_path)
+    
+    # Iterate over CSV rows and insert into the database
+    for index, row in df.iterrows():
+        try:
+            insert_detection_data(db, row, source)
+            logging.info(f"Inserted detection for image {row['image_name']} from {source}")
+        except Exception as e:
+            logging.error(f"Failed to insert detection for image {row['image_name']} from {source}: {e}")
+    
+    db.close()
