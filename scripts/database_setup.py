@@ -76,3 +76,12 @@ def process_csv(file_path, source):
             logging.error(f"Failed to insert detection for image {row['image_name']} from {source}: {e}")
     
     db.close()
+
+# Execute the main function for both Chemed and Lobelia datasets
+if __name__ == "__main__":
+    chemed_csv = "Chemed_all_detections.csv"  
+    process_csv(chemed_csv, "Chemed")
+
+    # Process the Lobelia CSV
+    lobelia_csv = "lobelia4cosmetics_all_detections.csv" 
+    process_csv(lobelia_csv, "Lobelia4cosmetics")
