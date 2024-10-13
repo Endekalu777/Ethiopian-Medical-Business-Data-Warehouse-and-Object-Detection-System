@@ -12,3 +12,4 @@ class Detection(Base):
     y_min = Column(Float)
     x_max = Column(Float)
     y_max = Column(Float)
+    source = Column(String, index = True)

@@ -22,6 +22,7 @@ class ObjectDetectionBase(BaseModel):
     y_min: float
     x_max: float
     y_max: float
+    source: str
 
 class ObjectDetectionCreate(ObjectDetectionBase):
     pass
