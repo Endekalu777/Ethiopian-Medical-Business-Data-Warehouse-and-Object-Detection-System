@@ -43,3 +43,19 @@ class DetectionResult(Base):
 
 # Create the detections_yolo table if it doesn't exist
 Base.metadata.create_all(bind=engine)
+
+# Function to insert detection data into the PostgreSQL database
+def insert_detection_data(db, row, source):
+    detection = DetectionResult(
+        image_name=row['image_name'],    # Adjusted to your column name
+        class_name=row['name'],          # Adjusted to your column name
+        confidence=row['confidence'],
+        x_min=row['xmin'],
+        y_min=row['ymin'],
+        x_max=row['xmax'],
+        y_max=row['ymax'],
+        source=source  # Add the source (Chemed or Lobelia)
+    )
+    db.add(detection)
+    db.commit()
+    db.refresh(detection)
