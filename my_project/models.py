@@ -6,7 +6,7 @@ class Detection(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     image_name = Column(String, index=True)
-    object_class = Column(String, index=True)
+    class_name = Column(String, index=True)
     confidence = Column(Float)
     x_min = Column(Float)
     y_min = Column(Float)

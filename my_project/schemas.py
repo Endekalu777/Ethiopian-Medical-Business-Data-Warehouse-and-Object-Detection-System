@@ -16,7 +16,7 @@ class TelegramData(TelegramDataBase):
 
 class ObjectDetectionBase(BaseModel):
     image_name: str
-    object_class: str
+    class_name: str
     confidence: float
     x_min: float
     y_min: float
