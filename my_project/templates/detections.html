@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detections</title>
+</head>
+<body>
+    <h1>Object Detections</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Image Name</th>
+                <th>Confidence</th>
+                <th>X Min</th>
+                <th>Y Min</th>
+                <th>X Max</th>
+                <th>Y Max</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detection in detections %}
+            <tr>
+                <td>{{ detection.id }}</td>
+                <td>{{ detection.image_name }}</td>
+                <td>{{ detection.confidence }}</td>
+                <td>{{ detection.x_min }}</td>
+                <td>{{ detection.y_min }}</td>
+                <td>{{ detection.x_max }}</td>
+                <td>{{ detection.y_max }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

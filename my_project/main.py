@@ -1,23 +1,20 @@
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
-from my_project import crud, models, schemas
-from my_project.database import SessionLocal, engine,get_db
-
-
-models.Base.metadata.create_all(bind=engine)
+import crud, models, schemas
+from database import SessionLocal, engine, get_db
+from fastapi import Depends, FastAPI, HTTPException
 
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"message": "Welcome to the Object Detection API"}
+templates = Jinja2Templates(directory="templates")
 
+@app.get("/", response_class=HTMLResponse)
+def welcome(request: Request):
+    return templates.TemplateResponse("welcome.html", {"request": request})
 
-@app.post("/detections/", response_model=schemas.ObjectDetection)
-def create_detection(detection: schemas.ObjectDetectionCreate, db: Session = Depends(get_db)):
-    return crud.create_detection(db=db, detection=detection)
-
-@app.get("/detections/", response_model=list[schemas.ObjectDetection])
-def read_detections(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    detections = crud.get_detections(db, skip=skip, limit=limit)
-    return detections
+@app.get("/detections/", response_class=HTMLResponse)
+def display_detections(request: Request, db: Session = Depends(get_db)):
+    detections = crud.get_detections(db)  
+    return templates.TemplateResponse("detections.html", {"request": request, "detections": detections})
