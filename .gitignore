@@ -65,6 +65,12 @@ site/
 .DS_Store
 Thumbs.db
 
+# sensitive files
+data/
+Data_Warehouse/
+photos/
+scraping_session.session
+logging/
 # logging and sensitive files
 logging/
 photos/
